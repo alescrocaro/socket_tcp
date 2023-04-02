@@ -8,7 +8,8 @@ import types
 selector = selectors.DefaultSelector()
 
 HOST = "127.0.0.1" # localhost
-PORT = 10666
+PORT = 10667
+
 # socket.AF_INET = internet address family for ipv4
 # socket.SOCK_STREAM = socket type for TCP
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,19 +35,16 @@ def service_connection(key, mask):
   if mask & selectors.EVENT_READ:
     recv_data = sock.recv(1024)  # Should be ready to read
     if recv_data:
-      # data.outb += recv_data
-      print(f"Received {recv_data!r} from connection {data.connid}")
-      data.recv_total += len(recv_data)
-    if not recv_data or data.recv_total == data.msg_total:
-      print(f"Closing connection to {data.addr} aaa {data.connid}")
+      data.outb += recv_data
+      print(data)
+    else:
+      print(data)
+      print(f"Closing connection to {data.addr}")
       selector.unregister(sock)
       sock.close()
   if mask & selectors.EVENT_WRITE:
-    if not data.outb:
-      data.outb = data.messages.pop(0)
-
     if data.outb:
-      print(f"Echoing {data.outb!r} to {data.addr} aaaa to connection {data.connid}")
+      print(f"Echoing {data.outb!r} to {data.addr}")
       sent = sock.send(data.outb)  # Should be ready to write
       data.outb = data.outb[sent:]
 
@@ -62,31 +60,3 @@ except KeyboardInterrupt:
   print("Caught keyboard interrupt, exiting")
 finally:
   selector.close()
-
-
-
-
-
-
-
-
-
-
-""" with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as serverSocket:
-  serverSocket.bind((HOST, PORT))
-  serverSocket.listen()
-  clientSocket, clientAddress = serverSocket.accept()
-
-  with clientSocket: # automatically closes socket at the end of block
-    print(f"Connected by {clientAddress}")
-    while True:
-      data = clientSocket.recv(1024) # read data sent by client
-      
-      clientSocket.sendall(data) # echo data back to client
-
-      if data == b"STOP":
-        break
-    # end while
-  # end with
-# end with """
-  
