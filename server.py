@@ -9,8 +9,8 @@ import json
 selector = selectors.DefaultSelector()
 
 HOST = "127.0.0.1" # localhost
-# PORT = 4444
-PORT = 7777
+PORT = 4444
+# PORT = 7777
 
 # socket.AF_INET = internet address family for ipv4
 # socket.SOCK_STREAM = socket type for TCP
@@ -24,20 +24,22 @@ serverSocket.setblocking(False)
 selector.register(serverSocket, selectors.EVENT_READ, data=None)
 
 def accept_wrapper(sock):
-  conn, addr = sock.accept()  # Should be ready to read
-  print(f"Accepted connection from {addr}")
-  conn.setblocking(False)
-  data = types.SimpleNamespace(addr=addr, inb=b"", outb=b"")
+  socket, clientAddress = sock.accept()  # Should be ready to read
+  print(f"Accepted connection from {clientAddress}")
+  socket.setblocking(False)
+  data = types.SimpleNamespace(addr=clientAddress, inb=b"", outb=b"")
   events = selectors.EVENT_READ | selectors.EVENT_WRITE
-  selector.register(conn, events, data=data)
+  selector.register(socket, events, data=data)
+
 
 def service_connection(key, mask):
-  sock = key.fileobj
+  serverSocket = key.fileobj
   data = key.data
+
   if mask & selectors.EVENT_READ:
     print('LEITURAAAAAAAAAAAAA')
     print()
-    recv_data = sock.recv(1024)  # Should be ready to read
+    recv_data = serverSocket.recv(1024)  # Should be ready to read
 
     if recv_data:
       data.outb += recv_data
@@ -48,10 +50,10 @@ def service_connection(key, mask):
       if recv_data == b"EXIT":
         print(f"Closing connection to {data.addr}")
         print()
-        selector.unregister(sock)
-        sock.close()
+        selector.unregister(serverSocket)
+        serverSocket.close()
         return
-      
+
       command = recv_data.split(b" ")
       print(command)
 
@@ -71,10 +73,12 @@ def service_connection(key, mask):
               print('User authenticated.')
               data.outb = b"SUCCESS"
               break
-          else: # this else points to 'for' loop
+
+          else:  # this else points to 'for' loop
             print('Invalid username or password.')
             data.outb = b"ERROR"
-            sent = sock.send(data.outb)  # Should be ready to write
+            # Should be ready to write
+            sent = serverSocket.send(data.outb)
             data.outb = data.outb[sent:]
 
           print(users)
@@ -82,44 +86,52 @@ def service_connection(key, mask):
           print(decodedUsername, decodedPassword)
           print()
 
-
         except:
           data.outb = b"ERROR"
-          sent = sock.send(data.outb)  # Should be ready to write
+          sent = serverSocket.send(data.outb) # Should be ready to write
           data.outb = data.outb[sent:]
 
     else:
       print(data)
       print(f"Closing connection to {data.addr}")
       print()
-      selector.unregister(sock)
-      sock.close()
+      selector.unregister(serverSocket)
+      serverSocket.close()
+
   if mask & selectors.EVENT_WRITE:
     print('ESCRITAAAAAAAAAAAAAA')
     if data.outb:
       print(f"Echoing {data.outb!r} to {data.addr}")
       print()
-      sent = sock.send(data.outb)  # Should be ready to write
+      sent = serverSocket.send(data.outb)  # Should be ready to write
       data.outb = data.outb[sent:]
+
 
 try:
   while True:
+    # blocks until there are sockets ready for I/O (like listen)
     events = selector.select(timeout=None)
-    print(f'events {events}')
+    print('events')
+    print()
     for key, mask in events:
       print('ENTROU FOR')
+      print()
       if key.data is None:
-        print(f' accept_wrapper key {key}')
+        print(' accept_wrapper')
         print()
-        time.sleep(2)
+        time.sleep(1)
         accept_wrapper(key.fileobj)
+
       else:
-        print(f'service_connection key {key}')
-        print(f'service_connection mask {mask}')
+        print(f'service_connection')
         print()
-        time.sleep(2)
+        time.sleep(1)
+        # mask = event mask of the operations that are ready.
+        # key = SelectorKey namedtuple. We will use just fileObj (socket) and data (data sent from client)
         service_connection(key, mask)
+
 except KeyboardInterrupt:
-  print("Caught keyboard interrupt, exiting")
+    print("Caught keyboard interrupt, exiting")
+
 finally:
-  selector.close()
+    selector.close()
