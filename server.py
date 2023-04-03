@@ -88,8 +88,7 @@ def service_connection(key, mask):
 
         except:
           data.outb = b"ERROR"
-          # Should be ready to write
-          sent = serverSocket.send(data.outb)
+          sent = serverSocket.send(data.outb) # Should be ready to write
           data.outb = data.outb[sent:]
 
     else:
