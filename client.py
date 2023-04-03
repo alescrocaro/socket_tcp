@@ -5,8 +5,8 @@ import types
 import hashlib
 
 HOST = "127.0.0.1" # localhost
-# PORT = 4444 # port used by server
-PORT = 7777 # port used by server
+PORT = 4444 # port used by server
+# PORT = 7777 # port used by server
 
 
 # socket.AF_INET = internet address family for ipv4
@@ -28,14 +28,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
               (username, password) = command[1].split(",")
               if(username != "" and not username.isspace() and password != "" and not password.isspace()):
                 print(username, password)
-                hashObject = hashlib.sha512()
-                hashObject.update(password.encode())
-                # obtém o hash como uma string hexadecimal
-                hexDig = hashObject.hexdigest()
+                hashObject = hashlib.sha512() # create SHA512 hash obj
+                hashObject.update(password.encode()) # encode string to bytes and update hash obj with result
+                hexDig = hashObject.hexdigest() # get hash as hexadecimal string
 
                 print(f"Hash SHA-512 de '{password}': {hexDig}")
 
-                message = command[0] + ' ' + username + ',' + hexDig
+                message = command[0] + ' ' + username + ',' + hexDig # update message with the encrypted password
 
                 sendData = True
 
