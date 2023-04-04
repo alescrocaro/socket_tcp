@@ -14,7 +14,7 @@ PORT = 4444 # port used by server
 # socket.SOCK_STREAM = socket type for TCP
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
   clientSocket.connect((HOST, PORT))
-  # message = sys.argv[1]
+  isAuthenticated = False
   message = ''
   while message != "EXIT":
     sendData = False
@@ -66,10 +66,26 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
         sendData = False
 
       if sendData:
-        clientSocket.sendall(message.encode())
+        if command[0] == 'CONNECT':
+          if isAuthenticated:
+            print("Already connected")
+
+          else:
+            clientSocket.sendall(message.encode())
+            data = clientSocket.recv(1024)
+            print(f'SERVER RESPONSE: {data.decode()}')
+            if data.decode() == 'SUCCESS':
+              isAuthenticated = True
         
-        data = clientSocket.recv(1024)
-    
-        print(f'SERVER RESPONSE: {data.decode()}')
+        else:
+          if isAuthenticated:
+            clientSocket.sendall(message.encode())
+
+            data = clientSocket.recv(1024)
+        
+            print(f'SERVER RESPONSE: {data.decode()}')
+          
+          else: 
+            print("You must be authenticated!")
   # end while
 # end with
