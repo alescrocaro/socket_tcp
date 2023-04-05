@@ -6,6 +6,11 @@ import logging
 # config logger
 logging.basicConfig(filename="server.log", level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
   
+REQ_TYPE = "0x01"
+ADDFILE_ID = "0x01"
+DELETE_ID = "0x02"
+GETFILESLIST_ID = "0x03"
+GETFILE_ID = "0x04"
 
 def handle_connection(client_socket, client_address):
   print(f'client_socket', client_socket)
@@ -13,21 +18,37 @@ def handle_connection(client_socket, client_address):
   while True:
     try:
       print('teste')
-      data = client_socket.recv(1024)
+      data = client_socket.recv(258).decode()
+      print('data')
       print(data)
-      req_type = data[0:1]
-      command_id = data[1:5]
-      filename_size = data[5:6]
-      last_pos_of_name = (6 + int(filename_size.decode()))
-      filename = data[6:last_pos_of_name]
+      req_type = data[0:4]
+      print('req_type')
+      print(req_type)
+      command_id = data[4:8]
+      print('command_id')
+      print(command_id)
+      file_name_size = data[8:12]
+      file_name_size = int(file_name_size)
+      print('file_name_size')
+      print(file_name_size)
+      last_pos_of_name = (12 + file_name_size)
+      file_name = data[12:last_pos_of_name]
+      print('file_name')
+      print(file_name)
 
       if not data:
         logging.error("No data")
+        print("No data")
         break
 
-      command, *args = data.decode().split()
-      if command == "ADDFILE":
-        handle_ADDFILE(client_socket, *args)
+      print('command')
+      if req_type == REQ_TYPE:
+        if command_id == ADDFILE_ID:
+          handle_ADDFILE(client_socket, file_name)
+
+      else:
+        print('algo deu errado')
+        continue
   
       # elif command == "DELETE":
       #   delete_file(client_socket, *args)
@@ -49,17 +70,28 @@ def handle_connection(client_socket, client_address):
   print("Closing connection")
   client_socket.close()
 
-def handle_ADDFILE(client_socket, filename, file_size):
-  with lock:
-    if filename in files:
-      client_socket.send("File already exists".encode())
-    else:
-      file_data = client_socket.recv(int(file_size))
-      with open(os.path.join(os.getcwd(), filename), "wb") as f:
-        f.write(file_data)
-      files[filename] = file_data
-      client_socket.send("File added successfully".encode())
-      logging.info(f"File '{filename}' added by {client_socket.getpeername()}")
+# client_socket = socket used to send the message to the client
+# file_name = the file name the client is tryng to add to the server
+def handle_ADDFILE(client_socket, file_name):
+  print('HANDLE ADD FILE')
+  files_path = './files/'
+  file_path = os.path.join(files_path, file_name)
+  print('file_path')
+  print(file_path)
+
+  if os.path.exists(file_path):
+    client_socket.send("File already exists".encode())
+    logging.error(f"File {file_name} already exists")
+
+  else:
+    file_size = os.path.getsize(file_name)
+    file_data = client_socket.recv(int(file_size))
+    with open(file_path, "wb") as file:
+      file.write(file_data)
+
+    # files[file_name] = file_data
+    client_socket.send("File added successfully".encode())
+    logging.info(f"File '{file_name}' added by {client_socket.getpeername()}")
 
 # def delete_file(client_socket, filename):
 #   with lock:
@@ -86,7 +118,7 @@ def handle_ADDFILE(client_socket, filename, file_size):
 
 HOST = "127.0.0.1"
 PORT = 4444
-# PORT = 7777
+PORT = 7777
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
 server_socket.listen()
