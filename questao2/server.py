@@ -1,168 +1,100 @@
-import sys
 import socket
-import selectors
-import time
-import types
-import json
+import threading
 import os
+import logging
 
-def accept_wrapper(sock):
-  socket, clientAddress = sock.accept()  # Should be ready to read
-  print(f"Accepted connection from {clientAddress}")
-  socket.setblocking(False)
-  data = types.SimpleNamespace(addr=clientAddress, inb=b"", outb=b"")
-  events = selectors.EVENT_READ | selectors.EVENT_WRITE
-  selector.register(socket, events, data=data)
+# config logger
+logging.basicConfig(filename="server.log", level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+  
 
-
-def service_connection(key, mask):
-  currentPath = os.getcwd()
-  serverSocket = key.fileobj
-  data = key.data
-
-  if mask & selectors.EVENT_READ:
-    recv_data = serverSocket.recv(1024)  # Should be ready to read
-
-    if recv_data:
-      data.outb += recv_data
-
-      if recv_data == b"EXIT":
-        print(f"Closing connection to {data.addr}")
-        selector.unregister(serverSocket)
-        serverSocket.close()
-        return
-
-      command = recv_data.split(b" ")
-
-      if command[0] == b"CONNECT":
-        try:
-          (username, password) = command[1].split(b",")
-
-          decodedUsername = username.decode("utf-8")
-          decodedPassword = password.decode("utf-8")
-
-          with open('users.json') as file:
-            users = json.load(file)['users']
-
-          for user in users:
-            if user['username'] == decodedUsername and user['password'] == decodedPassword:
-              data.outb = b"SUCCESS"
-              break
-
-          else:  # this else points to 'for' loop
-            data.outb = b"ERROR"
-            sent = serverSocket.send(data.outb) # Should be ready to write
-            data.outb = data.outb[sent:]
-
-        except:
-          data.outb = b"ERROR"
-          sent = serverSocket.send(data.outb) # Should be ready to write
-          data.outb = data.outb[sent:]
-
-      elif command[0] == b"PWD":
-        try:
-          print(f"path {currentPath}")
-          data.outb = currentPath.encode()
-
-        except:
-          data.outb = b"ERROR"
-          sent = serverSocket.send(data.outb) # Should be ready to write
-          data.outb = data.outb[sent:]
-
-
-      elif command[0] == b"CHDIR":
-        try:
-          os.chdir(command[1])
-          currentPath = os.path.abspath(os.getcwd())
-          data.outb = b"SUCCESS"
-
-        except:
-          data.outb = b"ERROR"
-          sent = serverSocket.send(data.outb) # Should be ready to write
-          data.outb = data.outb[sent:]
-
-      elif command[0] == b"GETFILES":
-        try:
-          files = os.listdir(currentPath)
-          data.outb = (str(len(files)) + '\n').encode()
-          # sent = serverSocket.send(data.outb)
-          # data.outb = b""
-          for file in files:
-            data.outb += (file + "\n").encode()
-          sent = serverSocket.send(data.outb)
-          data.outb = b""
-
-        except:
-          data.outb = b"ERROR"
-          sent = serverSocket.send(data.outb)
-          data.outb = data.outb[sent:]
-
-      elif command[0] == b"GETDIRS":
-        try:
-          dirs_only = [file for file in os.listdir() if os.path.isdir(file)]
-          data.outb = (str(len(dirs_only)) + '\n').encode()
-          # sent = serverSocket.send(data.outb)
-          # data.outb = b""
-          for dir in dirs_only:
-            data.outb += (dir + "\n").encode()
-          sent = serverSocket.send(data.outb)
-          data.outb = b""
-
-        except:
-          data.outb = b"ERROR"
-          sent = serverSocket.send(data.outb)
-          data.outb = data.outb[sent:]
-
-    else:
-      print(f"Closing connection to {data.addr}")
-      selector.unregister(serverSocket)
-      serverSocket.close()
-
-  if mask & selectors.EVENT_WRITE:
-    if data.outb:
-      print(f"Echoing {data.outb!r} to {data.addr}")
-      sent = serverSocket.send(data.outb)  # Should be ready to write
-      data.outb = data.outb[sent:]
-
-#####
-#####
-#####
-
-# used to manage I/O operations on more than one socket
-selector = selectors.DefaultSelector()
-
-HOST = "127.0.0.1" # localhost
-PORT = 4444
-# PORT = 7778
-
-# socket.AF_INET = internet address family for ipv4
-# socket.SOCK_STREAM = socket type for TCP
-serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-serverSocket.bind((HOST, PORT))
-serverSocket.listen()
-print(f"Listening on {(HOST, PORT)}")
-# set socket to non blocking mode
-serverSocket.setblocking(False)
-# register the socket to be monitorated
-selector.register(serverSocket, selectors.EVENT_READ, data=None)
-
-
-try:
+def handle_connection(client_socket, client_address):
+  print(f'client_socket', client_socket)
+  print(f'client_address', client_address)
   while True:
-    # blocks until there are sockets ready for I/O (like listen)
-    events = selector.select(timeout=None)
-    for key, mask in events:
-      if key.data is None:
-        # key.fileobj = socket
-        accept_wrapper(key.fileobj)
+    try:
+      print('teste')
+      data = client_socket.recv(1024)
+      print(data)
+      req_type = data[0:1]
+      command_id = data[1:5]
+      filename_size = data[5:6]
+      last_pos_of_name = (6 + int(filename_size.decode()))
+      filename = data[6:last_pos_of_name]
 
-      else:
-        # mask = event mask of the operations that are ready.
-        # key = SelectorKey namedtuple. We will use just fileObj (socket) and data (data sent from client)
-        service_connection(key, mask)
-      
-except KeyboardInterrupt:
-    print("Caught keyboard interrupt, exiting")
+      if not data:
+        logging.error("No data")
+        break
 
-finally:
-    selector.close()
+      command, *args = data.decode().split()
+      if command == "ADDFILE":
+        handle_ADDFILE(client_socket, *args)
+  
+      # elif command == "DELETE":
+      #   delete_file(client_socket, *args)
+
+      # elif command == "GETFILESLIST":
+      #   send_file_list(client_socket)
+
+      # elif command == "GETFILE":
+      #   send_file(client_socket, *args)
+
+      # else:
+      #   client_socket.send("Invalid command".encode())
+
+    except Exception as e:
+      logging.error(f"Error while handling connection: {e}")
+      print(f"Error while handling connection: {e}")
+      break
+
+  print("Closing connection")
+  client_socket.close()
+
+def handle_ADDFILE(client_socket, filename, file_size):
+  with lock:
+    if filename in files:
+      client_socket.send("File already exists".encode())
+    else:
+      file_data = client_socket.recv(int(file_size))
+      with open(os.path.join(os.getcwd(), filename), "wb") as f:
+        f.write(file_data)
+      files[filename] = file_data
+      client_socket.send("File added successfully".encode())
+      logging.info(f"File '{filename}' added by {client_socket.getpeername()}")
+
+# def delete_file(client_socket, filename):
+#   with lock:
+#     if filename in files:
+#       os.remove(os.path.join(os.getcwd(), filename))
+#       del files[filename]
+#       client_socket.send("File deleted successfully".encode())
+#       logging.info(f"File '{filename}' deleted by {client_socket.getpeername()}")
+#     else:
+#       client_socket.send("File not found".encode())
+
+# def send_file_list(self, client_socket):
+#   with lock:
+#     file_list = "\n".join(files.keys())
+#     client_socket.send(file_list.encode())
+
+# def send_file(self, client_socket, filename):
+#   with lock:
+#     if filename in files:
+#       client_socket.send(files[filename])
+#     else:
+#       client_socket.send("File not found".encode())
+
+
+HOST = "127.0.0.1"
+PORT = 4444
+# PORT = 7777
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((HOST, PORT))
+server_socket.listen()
+logging.info(f"Listening on {HOST}:{PORT}")
+print(f"Listening on {HOST}:{PORT}")
+while True:
+  client_connection, client_address = server_socket.accept()
+  logging.info(f"Accepted connection from {client_address}")
+  print(f"Accepted connection from {client_address}")
+  client_thread = threading.Thread(target=handle_connection, args=(client_connection, client_address))
+  client_thread.start()

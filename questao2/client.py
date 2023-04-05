@@ -1,75 +1,76 @@
-import sys
 import socket
-import selectors
-import types
-import hashlib
-
-HOST = "127.0.0.1" # localhost
-# PORT = 8888 # port used by server
-PORT = 4444 # port used by server
-# PORT = 7778 # port used by server
+import os
 
 
-# socket.AF_INET = internet address family for ipv4
-# socket.SOCK_STREAM = socket type for TCP
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as clientSocket:
-  clientSocket.connect((HOST, PORT))
-  # message = sys.argv[1]
-  message = ''
-  while message != "EXIT":
-    sendData = False
-    message = input("$ ")
-    if message != "" and not message.isspace():
-      command = message.split()
-      if message.startswith("CONNECT"):
-        if command[0] == "CONNECT":
-          if len(command) == 2:
-            try:
-              (username, password) = command[1].split(",")
-              if(username != "" and not username.isspace() and password != "" and not password.isspace()):
-                hashObject = hashlib.sha512() # create SHA512 hash obj
-                hashObject.update(password.encode()) # encode string to bytes and update hash obj with result
-                encryptedPassword = hashObject.hexdigest() # get hash as hexadecimal string
+REQ_TYPE = "1"
+COMMANDS_ID = [b"0x01", b"0x02", b"0x03", b"0x04"]
 
-                message = command[0] + ' ' + username + ',' + encryptedPassword # update message with the encrypted password
-
-                sendData = True
-
-            except:
-              print("INPUT ERROR")
-              sendData = False
-
-      elif message.startswith("PWD"):
-        if len(command) == 1 and command[0] == "PWD": 
-          sendData = True
-
-      # Can not start with "/"
-      # Can only change one dir by each command
-      elif message.startswith("CHDIR"):
-        if len(command) == 2 and command[0] == "CHDIR":
-          path = command[1].split("/")
-          formattedPath = list(filter(bool, path))
-          
-          message = command[0] + ' ' + formattedPath[0]
-
-          sendData = True
-
-      elif message.startswith("GETFILES"):
-        if command[0] == "GETFILES" and len(command) == 1:
-          sendData = True  
-
-      elif message.startswith("GETDIRS"):
-        if command[0] == "GETDIRS" and len(command) == 1:
-          sendData = True  
-
-      else: 
-        sendData = False
-
-      if sendData:
-        clientSocket.sendall(message.encode())
-        
-        data = clientSocket.recv(1024)
+def get_command_id(command):
+  match command:
+    case 'ADDFILE':
+      return COMMANDS_ID[0]
+    case 'DELETE':
+      return COMMANDS_ID[1]
+    case 'GETFILESLIST':
+      return COMMANDS_ID[2]
+    case 'GETFILE':
+      return COMMANDS_ID[3]
     
-        print(f'SERVER RESPONSE: {data.decode()}')
-  # end while
-# end with
+def build_header(command, file_name):  
+  header = REQ_TYPE.encode()
+  header += get_command_id(command) # command id
+
+  if command in ['ADDFILE', 'DELETE', 'GETFILES']:
+    file_name = message.split()[1]
+  
+  else:
+    file_name = ''
+
+  header += str(len(file_name)).encode() # file name size
+  header += bytes(file_name, 'utf-8') # file name in bytes
+
+  return header
+
+def send_command(client_socket, message):
+  print('entrou sendcommand')
+  command, file_name = message.split()
+
+  header = build_header(command, file_name)
+
+  if command == "ADDFILE":
+    file_size = os.path.getsize(file_name)
+    header += str(file_size).encode()
+    try:
+      with open(file_name, 'rb') as f:
+        for file_data in f:
+          header += file_data
+          client_socket.send(header)
+          header = b""
+
+    except Exception as e:
+      print(f"Error adding file: {e}")
+
+  else:
+    print(header)
+    client_socket.send(header)
+    return
+  response = client_socket.recv(1024).decode()
+  print(response)
+
+
+HOST = "127.0.0.1"
+PORT = 4444
+# PORT = 7777
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((HOST, PORT))
+
+while True:
+  message = input("$ ")
+  print(f'message {message}')
+  if not message:
+    continue
+
+  
+  send_command(client_socket, message)
+  
+  

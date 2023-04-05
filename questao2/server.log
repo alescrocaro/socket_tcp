@@ -1,0 +1,56 @@
+2023-04-04 22:14:15,774 [INFO] Accepted connection from ('127.0.0.1', 48268)
+2023-04-04 22:14:54,909 [INFO] Accepted connection from ('127.0.0.1', 43814)
+2023-04-04 22:15:13,653 [INFO] Accepted connection from ('127.0.0.1', 45520)
+2023-04-04 22:15:38,009 [INFO] Accepted connection from ('127.0.0.1', 42230)
+2023-04-04 22:16:06,933 [INFO] Accepted connection from ('127.0.0.1', 44600)
+2023-04-04 22:36:58,150 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:36:59,523 [INFO] Accepted connection from ('127.0.0.1', 48698)
+2023-04-04 22:37:53,239 [INFO] Listening on 127.0.0.1:7777
+2023-04-04 22:37:54,536 [INFO] Accepted connection from ('127.0.0.1', 33636)
+2023-04-04 22:38:53,215 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:38:56,320 [INFO] Accepted connection from ('127.0.0.1', 44412)
+2023-04-04 22:39:39,515 [INFO] Listening on 127.0.0.1:7777
+2023-04-04 22:39:48,401 [INFO] Accepted connection from ('127.0.0.1', 60868)
+2023-04-04 22:41:02,420 [INFO] Listening on 127.0.0.1:4443
+2023-04-04 22:41:03,856 [INFO] Accepted connection from ('127.0.0.1', 46918)
+2023-04-04 22:41:40,100 [INFO] Listening on 127.0.0.1:7777
+2023-04-04 22:41:41,396 [INFO] Accepted connection from ('127.0.0.1', 56580)
+2023-04-04 22:43:02,241 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:43:19,991 [INFO] Accepted connection from ('127.0.0.1', 36860)
+2023-04-04 22:44:13,788 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:44:15,182 [INFO] Accepted connection from ('127.0.0.1', 35328)
+2023-04-04 22:44:52,760 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:44:56,357 [INFO] Accepted connection from ('127.0.0.1', 40802)
+2023-04-04 22:45:49,988 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:45:51,298 [INFO] Accepted connection from ('127.0.0.1', 33296)
+2023-04-04 22:48:01,133 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:48:02,439 [INFO] Accepted connection from ('127.0.0.1', 41290)
+2023-04-04 22:48:48,621 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:48:49,808 [INFO] Accepted connection from ('127.0.0.1', 50276)
+2023-04-04 22:49:18,086 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:49:19,359 [INFO] Accepted connection from ('127.0.0.1', 56730)
+2023-04-04 22:50:22,936 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:50:24,286 [INFO] Accepted connection from ('127.0.0.1', 46814)
+2023-04-04 22:51:20,121 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:51:21,417 [INFO] Accepted connection from ('127.0.0.1', 37816)
+2023-04-04 22:51:46,242 [INFO] Accepted connection from ('127.0.0.1', 60986)
+2023-04-04 22:52:24,546 [INFO] Accepted connection from ('127.0.0.1', 49138)
+2023-04-04 22:54:24,109 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:54:25,667 [INFO] Accepted connection from ('127.0.0.1', 44178)
+2023-04-04 22:55:23,832 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:55:25,775 [INFO] Accepted connection from ('127.0.0.1', 40176)
+2023-04-04 22:55:50,749 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:55:52,006 [INFO] Accepted connection from ('127.0.0.1', 55460)
+2023-04-04 22:58:32,009 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:58:33,329 [INFO] Accepted connection from ('127.0.0.1', 44722)
+2023-04-04 22:59:09,370 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 22:59:10,533 [INFO] Accepted connection from ('127.0.0.1', 58450)
+2023-04-04 23:01:09,193 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 23:01:11,221 [INFO] Accepted connection from ('127.0.0.1', 51584)
+2023-04-04 23:01:16,144 [ERROR] Error while handling client: 'str' object has no attribute 'decode'
+2023-04-04 23:01:48,959 [INFO] Listening on 127.0.0.1:7777
+2023-04-04 23:01:50,146 [INFO] Accepted connection from ('127.0.0.1', 36148)
+2023-04-04 23:01:57,845 [ERROR] Error while handling client: unsupported operand type(s) for +: 'int' and 'str'
+2023-04-04 23:02:57,123 [INFO] Listening on 127.0.0.1:4444
+2023-04-04 23:02:58,474 [INFO] Accepted connection from ('127.0.0.1', 40556)
+2023-04-04 23:07:48,402 [ERROR] Error while handling client: invalid literal for int() with base 10: ''
