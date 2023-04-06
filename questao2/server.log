@@ -142,3 +142,4 @@
 2023-04-06 00:59:45,263 [INFO] Accepted connection from ('127.0.0.1', 47794)
 2023-04-06 00:59:51,277 [INFO] File teste send to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 47794)>
 2023-04-06 00:59:58,236 [INFO] File teste send to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 47794)>
+2023-04-06 01:00:38,006 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
