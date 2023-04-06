@@ -71,3 +71,74 @@
 2023-04-06 00:16:48,384 [INFO] Accepted connection from ('127.0.0.1', 51876)
 2023-04-06 00:16:51,638 [INFO] File 'nums' deleted by ('127.0.0.1', 51876)
 2023-04-06 00:16:55,973 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:31:38,101 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:31:39,348 [INFO] Accepted connection from ('127.0.0.1', 60694)
+2023-04-06 00:32:19,987 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:32:21,318 [INFO] Accepted connection from ('127.0.0.1', 44866)
+2023-04-06 00:32:29,265 [INFO] File 'nums' added by ('127.0.0.1', 44866)
+2023-04-06 00:32:29,407 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:33:27,626 [INFO] Accepted connection from ('127.0.0.1', 60952)
+2023-04-06 00:33:33,267 [ERROR] File nums already exists
+2023-04-06 00:33:33,268 [ERROR] Error while handling connection: invalid literal for int() with base 10: '5\n6\n'
+2023-04-06 00:34:01,982 [INFO] Accepted connection from ('127.0.0.1', 54660)
+2023-04-06 00:34:05,077 [INFO] File 'nums' added by ('127.0.0.1', 54660)
+2023-04-06 00:34:42,110 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:34:42,568 [INFO] Accepted connection from ('127.0.0.1', 40830)
+2023-04-06 00:34:47,669 [INFO] File 'nums2' added by ('127.0.0.1', 40830)
+2023-04-06 00:37:13,140 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:37:13,978 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:37:15,166 [INFO] Accepted connection from ('127.0.0.1', 46680)
+2023-04-06 00:37:22,961 [ERROR] Error while handling connection: 'socket' object has no attribute 'peername'
+2023-04-06 00:38:57,254 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:38:58,706 [INFO] Accepted connection from ('127.0.0.1', 35698)
+2023-04-06 00:39:05,755 [ERROR] Error while handling connection: 'socket' object has no attribute 'peername'
+2023-04-06 00:40:23,414 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:40:24,630 [INFO] Accepted connection from ('127.0.0.1', 57282)
+2023-04-06 00:40:40,110 [ERROR] Error tryng to send teste to <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 57282)>
+2023-04-06 00:41:16,267 [INFO] Listening on 127.0.0.1:7777
+2023-04-06 00:41:17,574 [INFO] Accepted connection from ('127.0.0.1', 58636)
+2023-04-06 00:41:21,972 [ERROR] Error while handling connection: 'socket' object has no attribute 'raddress'
+2023-04-06 00:42:04,856 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 00:42:06,037 [INFO] Accepted connection from ('127.0.0.1', 47330)
+2023-04-06 00:42:12,515 [ERROR] Error while handling connection: 'socket' object has no attribute 'raddr'
+2023-04-06 00:42:41,412 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:42:43,787 [INFO] Accepted connection from ('127.0.0.1', 33858)
+2023-04-06 00:42:51,227 [ERROR] Error tryng to send teste
+2023-04-06 00:43:34,215 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:43:34,293 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:44:02,564 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:44:03,814 [INFO] Accepted connection from ('127.0.0.1', 33046)
+2023-04-06 00:44:09,182 [ERROR] Error tryng to send teste
+2023-04-06 00:44:37,538 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:44:53,782 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:44:55,229 [INFO] Accepted connection from ('127.0.0.1', 60494)
+2023-04-06 00:45:00,115 [ERROR] Error tryng to send teste
+2023-04-06 00:45:49,278 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:45:50,236 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:45:51,385 [INFO] Accepted connection from ('127.0.0.1', 53368)
+2023-04-06 00:45:54,866 [ERROR] Error tryng to send teste
+2023-04-06 00:46:31,064 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:46:31,115 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:46:33,918 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:46:35,263 [INFO] Accepted connection from ('127.0.0.1', 32866)
+2023-04-06 00:46:39,628 [ERROR] Error tryng to send teste
+2023-04-06 00:48:50,760 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:50:02,412 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:50:03,667 [INFO] Accepted connection from ('127.0.0.1', 39214)
+2023-04-06 00:50:08,724 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:50:48,531 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:50:49,773 [INFO] Accepted connection from ('127.0.0.1', 44560)
+2023-04-06 00:55:59,235 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:56:00,469 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:56:04,343 [INFO] Accepted connection from ('127.0.0.1', 59912)
+2023-04-06 00:57:02,875 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:57:03,960 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:57:05,166 [INFO] Accepted connection from ('127.0.0.1', 53778)
+2023-04-06 00:57:14,475 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:58:11,739 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:58:12,986 [INFO] Accepted connection from ('127.0.0.1', 36816)
+2023-04-06 00:59:43,377 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 00:59:44,145 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 00:59:45,263 [INFO] Accepted connection from ('127.0.0.1', 47794)
+2023-04-06 00:59:51,277 [INFO] File teste send to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 47794)>
+2023-04-06 00:59:58,236 [INFO] File teste send to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 47794)>

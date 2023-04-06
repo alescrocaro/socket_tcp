@@ -57,6 +57,7 @@ def handle_connection(client_socket, client_address):
           handle_DELETE(client_socket, file_name)
         
         elif command_id == GETFILE_ID:
+          print('COMMAND: GETFILE')
           handle_GETFILE(client_socket, file_name)
 
       else:
@@ -83,7 +84,7 @@ def handle_connection(client_socket, client_address):
 def handle_ADDFILE(client_socket, file_name):
   response =  f"{RES_TYPE}{ADDFILE_ID}"
   name = file_name.split('/')[-1]
-  files_path = './files/'
+  files_path = './files_server/'
   file_path = os.path.join(files_path, name)
   print('file_path')
   print(file_path)
@@ -109,8 +110,8 @@ def handle_ADDFILE(client_socket, file_name):
 # client_socket = socket used to send the message to the client
 # file_name = the file name the client is tryng to remove from files folder
 def handle_DELETE(client_socket, file_name):
-  response =  f"{RES_TYPE}{ADDFILE_ID}"
-  file_path = './files/' + file_name
+  response =  f"{RES_TYPE}{DELETE_ID}"
+  file_path = './files_server/' + file_name
   print (file_path)
   if not os.path.exists(file_path):
     response += f"{ERROR}"
@@ -131,10 +132,39 @@ def handle_DELETE(client_socket, file_name):
       logging.error(f"Error tryng to delete file '{file_name}' by {client_socket.getpeername()}")
 
 def handle_GETFILE(client_socket, file_name):
-  if file_name in files:
-    client_socket.send(files[file_name])
+  response =  f"{RES_TYPE}{GETFILE_ID}"
+  file_path = './files_server/' + file_name
+  if not os.path.exists(file_path):
+    response += f"{ERROR}"
+    client_socket.send(response.encode())
+    print(f"File {file_name} does not exists")
+    logging.error(f"File {file_name} does not exists")
+
   else:
-    client_socket.send("File not found".encode())
+    try: 
+      print('before open file')
+      with open(file_path, 'rb') as file:
+        data = file.read()
+      print('after open file')
+
+      file_size = os.path.getsize(file_path)
+      print('file_size')
+      print(file_size)
+
+      file_size_with_zeros = str(file_size).zfill(16)
+      response += f"{SUCCESS}"
+      response += file_size_with_zeros
+      response = response.encode()
+      response += data
+      client_socket.send(response)
+      logging.info(f"File {file_name} sent to client: {client_socket}")
+
+    except:
+      response += f"{ERROR}"
+      client_socket.send(response.encode())
+      logging.error(f"Error tryng to send {file_name}")
+      print(f"Error tryng to send {file_name}")
+
 
 # def send_file_list(self, client_socket):
 #   with lock:
@@ -145,7 +175,7 @@ def handle_GETFILE(client_socket, file_name):
 
 HOST = "127.0.0.1"
 PORT = 4444
-# PORT = 7777
+# PORT = 7770
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
 server_socket.listen()

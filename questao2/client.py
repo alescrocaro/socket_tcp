@@ -60,7 +60,7 @@ def build_header(command, file_name):
   header = REQ_TYPE.encode()
   header += get_command_id_by_name(command) # command id
 
-  if command in ['ADDFILE', 'DELETE', 'GETFILES']:
+  if command in ['ADDFILE', 'DELETE', 'GETFILE']:
     file_name = message.split()[1]
   
   else:
@@ -73,12 +73,18 @@ def build_header(command, file_name):
   return header
 
 def desestructure_response(response):
-  response = response.decode()
+  decoded_response = response.decode()
   type = RES_TYPE
-  command_name = get_command_name_by_id(response[4:8])
-  status_code = get_status_code_by_id(response[8:12])
+  command_name = get_command_name_by_id(decoded_response[4:8])
+  status_code = get_status_code_by_id(decoded_response[8:12])
+  file_size = ''
+  file_data = ''
 
-  return type, command_name, status_code
+  if command_name == 'ADDFILE' or command_name == 'GETFILE':
+    file_size = decoded_response[12:28]
+    file_data = response[28:]
+
+  return type, command_name, status_code, file_size, file_data
 
 def send_command(client_socket, message):
   print('entrou sendcommand')
@@ -112,7 +118,7 @@ def send_command(client_socket, message):
 
 HOST = "127.0.0.1"
 PORT = 4444
-# PORT = 7777
+# PORT = 7770
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((HOST, PORT))
 
@@ -125,10 +131,24 @@ while True:
   if message.split()[0] in commands:
     response = send_command(client_socket, message)
   
-  _, command_name, status_code = desestructure_response(response)
+  _, command_name, status_code, file_size, file_data = desestructure_response(response)
 
   print(f'{command_name} returned: {status_code}')
+  print('file_size')
+  print(file_size)
+  print('file_data')
+  print(file_data)
   if command_name == "EXIT":
     print('Closing connection')
     break 
+
+  if command_name == "GETFILE":
+    file_name = message.split()[-1]
+    file_path = './files_client/' + file_name
+    if os.path.exists(file_path):
+      print(f"File {file_name} already exists")
+
+    else:
+      with open(file_path, "wb") as file:
+        file.write(file_data)
   
