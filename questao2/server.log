@@ -348,3 +348,83 @@
 2023-04-06 21:15:19,956 [INFO] Accepted connection from ('127.0.0.1', 41474)
 2023-04-06 21:15:23,670 [INFO] File 'testeteste' added by ('127.0.0.1', 41474)
 2023-04-06 21:15:51,282 [ERROR] No data
+2023-04-06 21:18:30,896 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:18:32,149 [INFO] Accepted connection from ('127.0.0.1', 41778)
+2023-04-06 21:18:36,753 [ERROR] File testeteste already exists
+2023-04-06 21:20:37,716 [ERROR] No data
+2023-04-06 21:20:41,344 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:20:44,014 [INFO] Accepted connection from ('127.0.0.1', 53392)
+2023-04-06 21:21:07,126 [ERROR] No data
+2023-04-06 21:22:10,656 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:22:12,315 [INFO] Accepted connection from ('127.0.0.1', 38986)
+2023-04-06 21:22:19,470 [INFO] File 'testeteste' deleted by ('127.0.0.1', 38986)
+2023-04-06 21:22:29,890 [INFO] File 'testeteste' added by ('127.0.0.1', 38986)
+2023-04-06 21:22:53,014 [ERROR] No data
+2023-04-06 21:22:55,378 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:26:45,598 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:26:46,722 [INFO] Accepted connection from ('127.0.0.1', 43360)
+2023-04-06 21:26:50,897 [ERROR] File testeteste already exists
+2023-04-06 21:27:02,909 [INFO] File 'testeteste' deleted by ('127.0.0.1', 43360)
+2023-04-06 21:27:07,200 [INFO] File 'testeteste' added by ('127.0.0.1', 43360)
+2023-04-06 21:27:22,933 [INFO] File nums sent to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 43360)>
+2023-04-06 21:27:23,036 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:28:12,552 [INFO] Accepted connection from ('127.0.0.1', 54120)
+2023-04-06 21:28:21,373 [INFO] File nums sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 54120)>
+2023-04-06 21:28:32,203 [INFO] File nums sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 54120)>
+2023-04-06 21:29:05,982 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:29:07,084 [INFO] Accepted connection from ('127.0.0.1', 56282)
+2023-04-06 21:29:11,979 [INFO] File nums sent to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 56282)>
+2023-04-06 21:30:16,841 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:30:17,887 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:30:19,111 [INFO] Accepted connection from ('127.0.0.1', 45514)
+2023-04-06 21:30:27,067 [INFO] File nums sent to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 45514)>
+2023-04-06 21:31:39,088 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:31:39,553 [INFO] Accepted connection from ('127.0.0.1', 33058)
+2023-04-06 21:31:44,714 [INFO] File nums2 sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 33058)>
+2023-04-06 21:33:34,006 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:33:34,579 [INFO] Accepted connection from ('127.0.0.1', 48058)
+2023-04-06 21:33:43,512 [INFO] File nums sent to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 48058)>
+2023-04-06 21:38:35,160 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:38:35,974 [INFO] Accepted connection from ('127.0.0.1', 39732)
+2023-04-06 21:38:44,961 [INFO] File nums sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 39732)>
+2023-04-06 21:40:03,864 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:40:04,417 [INFO] Accepted connection from ('127.0.0.1', 42536)
+2023-04-06 21:40:14,715 [ERROR] File nums[3~ does not exists
+2023-04-06 21:40:22,337 [ERROR] No data
+2023-04-06 21:40:23,422 [INFO] Accepted connection from ('127.0.0.1', 51672)
+2023-04-06 21:40:26,662 [INFO] File nums sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 51672)>
+2023-04-06 21:41:17,096 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:41:17,954 [INFO] Accepted connection from ('127.0.0.1', 51738)
+2023-04-06 21:41:31,087 [INFO] File nums sent to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 51738)>
+2023-04-06 21:42:32,702 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:42:39,119 [INFO] Accepted connection from ('127.0.0.1', 54930)
+2023-04-06 21:42:48,187 [INFO] File nums sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 54930)>
+2023-04-06 21:43:20,759 [ERROR] Error while handling connection: [Errno 104] Connection reset by peer
+2023-04-06 21:43:21,452 [INFO] Accepted connection from ('127.0.0.1', 42072)
+2023-04-06 21:43:31,008 [INFO] File nums sent to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 42072)>
+2023-04-06 21:44:46,655 [INFO] Accepted connection from ('127.0.0.1', 52470)
+2023-04-06 21:44:54,999 [INFO] File testeteste sent to client: <socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 52470)>
+2023-04-06 21:54:03,508 [ERROR] No data
+2023-04-06 21:54:13,243 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 21:54:14,801 [INFO] Accepted connection from ('127.0.0.1', 37772)
+2023-04-06 21:54:19,114 [INFO] Sending files list to ('127.0.0.1', 37772)
+2023-04-06 22:30:46,414 [ERROR] No data
+2023-04-06 22:30:48,119 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 22:30:50,117 [INFO] Accepted connection from ('127.0.0.1', 48794)
+2023-04-06 22:30:55,888 [INFO] Sending files list to ('127.0.0.1', 48794)
+2023-04-06 22:32:18,541 [ERROR] File lio does not exists
+2023-04-06 22:45:17,939 [ERROR] No data
+2023-04-06 22:45:19,318 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 22:45:20,881 [INFO] Accepted connection from ('127.0.0.1', 37646)
+2023-04-06 22:45:24,867 [ERROR] File nums already exists
+2023-04-06 22:46:36,999 [ERROR] Error while handling connection: handle_GETFILE() takes 2 positional arguments but 3 were given
+2023-04-06 22:47:41,649 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 22:47:43,176 [INFO] Accepted connection from ('127.0.0.1', 52524)
+2023-04-06 22:47:48,522 [ERROR] File nusm23 does not exists
+2023-04-06 22:47:56,852 [ERROR] File nums3 does not exists
+2023-04-06 22:48:24,683 [ERROR] File errooooo does not exists
+2023-04-06 22:51:57,362 [ERROR] No data
+2023-04-06 22:51:58,153 [INFO] Accepted connection from ('127.0.0.1', 35276)
+2023-04-06 22:52:02,931 [ERROR] File nums32 does not exists
+2023-04-06 22:52:09,554 [INFO] File nums2 sent to client: ('127.0.0.1', 35276)
+2023-04-06 23:39:58,301 [ERROR] No data

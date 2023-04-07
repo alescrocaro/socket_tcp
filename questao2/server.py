@@ -16,52 +16,42 @@ GETFILESLIST_ID = 3
 GETFILE_ID = 4
 EXIT_ID = 5
 
+# wait for client request and calls the requested functionality 
+# client_socket = client socket used to send response
+# client_address = client address used to know who made the request
 def handle_connection(client_socket, client_address):
-  global response
-
   while True:
     try:
       print('LENDO REQUISICAO CLIENTE')
       data = client_socket.recv(1024)
-      print('data')
-      print(data)
       message_type = data[0:1]
-      print('message_type')
-      print(message_type)
       command_id = data[1:2]
-      print('command_id')
-      print(command_id)
       file_name_size = data[2:3]
       file_name_size = int.from_bytes(file_name_size, 'big')
-      print('file_name_size')
-      print(file_name_size)
       last_pos_of_name = (3 + file_name_size)
       file_name = data[3:last_pos_of_name]
-      print('file_name')
-      print(file_name)
 
       if not data:
         logging.error("No data")
         print("No data")
         break
 
-      print('command')
       if message_type == REQ.to_bytes(1, 'big'):
         file_name = file_name.decode('utf8')
         if command_id == ADDFILE_ID.to_bytes(1, 'big'):
           print('COMMAND: ADDFILE')
-          handle_ADDFILE(client_socket, file_name)
-        elif command_id == DELETE_ID:
+          handle_ADDFILE(client_socket, file_name, client_address)
+        elif command_id == DELETE_ID.to_bytes(1, 'big'):
           print('COMMAND: DELETE')
-          handle_DELETE(client_socket, file_name)
+          handle_DELETE(client_socket, file_name, client_address)
         
-        elif command_id == GETFILE_ID:
+        elif command_id == GETFILE_ID.to_bytes(1, 'big'):
           print('COMMAND: GETFILE')
-          handle_GETFILE(client_socket, file_name)
+          handle_GETFILE(client_socket, file_name, client_address)
         
-        elif command_id == GETFILESLIST_ID:
+        elif command_id == GETFILESLIST_ID.to_bytes(1, 'big'):
           print('COMMAND: GETFILESLIST')
-          handle_GETFILESLIST(client_socket)
+          handle_GETFILESLIST(client_socket, client_address)
 
       else:
         logging.error(f"Something went wrong...")
@@ -76,21 +66,19 @@ def handle_connection(client_socket, client_address):
   print("Closing connection")
   client_socket.close()
 
+# upload a file in files_server, if it doesnt exists
 # client_socket = socket used to send the message to the client
-# file_name = the file name the client is tryng to add to the server
-def handle_ADDFILE(client_socket, file_name):
+# file_name = relative path of the file name the client is tryng to add to the server
+# client_address = client address used to know who made the request
+def handle_ADDFILE(client_socket, file_name, client_address):
   response =  RES.to_bytes(1, 'big')
   response +=  ADDFILE_ID.to_bytes(1, 'big')
   name = file_name.split('/')[-1]
   files_path = './files_server/'
   file_path = os.path.join(files_path, name)
-  print('file_path')
-  print(file_path)
 
   if os.path.exists(file_path):
     response += ERROR.to_bytes(1, 'big')
-    print('ADDFILE ERROR response')
-    print(response)
     client_socket.send(response)
     print(f"File {name} already exists")
     logging.error(f"File {name} already exists")
@@ -112,43 +100,55 @@ def handle_ADDFILE(client_socket, file_name):
 
     response += SUCCESS.to_bytes(1, 'big')
     response += file_size.to_bytes(4, 'big')
-    print('ADDFILE SUCCESS response')
-    print(response)
+    response += data
     client_socket.send(response)
-    print(f"File '{name}' added by {client_socket.getpeername()}")
-    logging.info(f"File '{name}' added by {client_socket.getpeername()}")
+    print(f"File '{name}' added by {client_address}")
+    logging.info(f"File '{name}' added by {client_address}")
 
-# has no validation if file_name receives ../file_name
+# deletes the file the client wants (the client cant send the file_name with a 
+# '/' in first position) 
 # client_socket = socket used to send the message to the client
-# file_name = the file name the client is tryng to remove from files folder
-def handle_DELETE(client_socket, file_name):
-  response =  f"{RES}{DELETE_ID}"
-  file_path = './files_server/' + file_name
+# file_name = relative path of the file
+# client_address = client address used to know who made the request
+def handle_DELETE(client_socket, file_name, client_address):
+  response =  RES.to_bytes(1, 'big')
+  response +=  DELETE_ID.to_bytes(1, 'big')
+  file_path = file_name
+  if (not file_path.startswith('./')):
+    file_path = './' + file_path
+
   print (file_path)
   if not os.path.exists(file_path):
-    response += f"{ERROR}"
-    client_socket.send(response.encode())
+    response += ERROR.to_bytes(1, 'big')
+    client_socket.send(response)
     print(f"File {file_name} does not exists")
     logging.error(f"File {file_name} does not exists")
 
   else:
     try:
       os.remove(file_path)
-      logging.info(f"File '{file_name}' deleted by {client_socket.getpeername()}")
-      print(f"File '{file_name}' deleted by {client_socket.getpeername()}")
-      response += f"{SUCCESS}"
-      client_socket.send(response.encode())
+      logging.info(f"File '{file_name}' deleted by {client_address}")
+      print(f"File '{file_name}' deleted by {client_address}")
+      response += SUCCESS.to_bytes(1, 'big')
+      client_socket.send(response)
     except:
-      response += f"{ERROR}"
-      client_socket.send(response.encode())
-      logging.error(f"Error tryng to delete file '{file_name}' by {client_socket.getpeername()}")
+      response += ERROR.to_bytes(1, 'big')
+      client_socket.send(response)
+      logging.error(f"Error tryng to delete file '{file_name}' by {client_address}")
 
-def handle_GETFILE(client_socket, file_name):
-  response =  f"{RES}{GETFILE_ID}"
+
+# download the requested file -> copy a file that exists in files_server to 
+# files_client
+# client_socket = socket used to send the message to the client
+# file_name = file name that exists in files_server folder
+# client_address = client address used to know who made the request
+def handle_GETFILE(client_socket, file_name, client_address):
+  response =  RES.to_bytes(1, 'big')
+  response += GETFILE_ID.to_bytes(1, 'big')
   file_path = './files_server/' + file_name
   if not os.path.exists(file_path):
-    response += f"{ERROR}"
-    client_socket.send(response.encode())
+    response += ERROR.to_bytes(1, 'big')
+    client_socket.send(response)
     print(f"File {file_name} does not exists")
     logging.error(f"File {file_name} does not exists")
 
@@ -163,46 +163,49 @@ def handle_GETFILE(client_socket, file_name):
       print('file_size')
       print(file_size)
 
-      file_size_with_zeros = str(file_size).zfill(16)
-      response += f"{SUCCESS}"
-      response += file_size_with_zeros
-      response = response.encode()
+      response += SUCCESS.to_bytes(1, 'big')
+      response += file_size.to_bytes(4, 'big')
       response += data
       client_socket.send(response)
-      logging.info(f"File {file_name} sent to client: {client_socket}")
+      logging.info(f"File {file_name} sent to client: {client_address}")
 
     except:
-      response += f"{ERROR}"
-      client_socket.send(response.encode())
+      response += ERROR.to_bytes(1, 'big')
+      client_socket.send(response)
       logging.error(f"Error tryng to send {file_name}")
       print(f"Error tryng to send {file_name}")
 
+# returns all the files in files_server dir
+# client_socket = socket used to send the message to the client
+# client_address = client address used to know who made the request
+def handle_GETFILESLIST(client_socket, client_address):
+  response = RES.to_bytes(1, 'big')
+  response += GETFILESLIST_ID.to_bytes(1, 'big')
 
-def handle_GETFILESLIST(client_socket):
-  response =  f"{RES}{GETFILESLIST_ID}"
   try:
-    response += f"{SUCCESS}"
     file_list = os.listdir('./files_server')
-    print("TESTE")
-    print(file_list)
+    response += SUCCESS.to_bytes(1, 'big')
     for file_name in file_list:
-      response += str(len(file_name))
-      response += file_name
-      print ('for ' + response)
+      response += len(file_name).to_bytes(2, 'big')
+      response += bytes(file_name, 'utf-8')
 
-    print (response)
+    logging.info(f"Sending files list to {client_address}")
+    print(f"Sending files list to {client_address}")
+    print("response SUCCESS get file list")
+    print(response)
     client_socket.send(response)
+
   except:
-    response += f"{ERROR}"
+    response += ERROR.to_bytes(1, 'big')
     client_socket.send(response)
-    logging.error(f"Error tryng to get files list")
-    print(f"Error tryng to get files list")
+    logging.error(f"Error tryng to get files list for {client_address}")
+    print(f"Error tryng to get files list for {client_address}")
 
 
 
 HOST = "127.0.0.1"
 PORT = 4444
-# PORT = 7770
+PORT = 7770
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind((HOST, PORT))
 server_socket.listen()
