@@ -11,6 +11,15 @@ run the client in other terminal
 $ python3 client.py
 ```
 
+in client you can run on terminal
+```bash
+$ GETILE nums
+$ GETILESLIST
+$ ADDFILE ../nums2
+$ DELETE nums
+$ EXIT
+```
+
 ## Libraries
 - `socket`: used to manage connections between client and server
 - `os`: used to manage files paths
