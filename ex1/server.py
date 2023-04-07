@@ -3,19 +3,27 @@ import threading
 import json
 import os
 
-def service_connection(clientSocket, address):
+# receives the command by the client and manage it (comments in each funcionality)
+# client_socket = socket connection with client
+# address = client address (Host and port)
+# return the response to the client
+def service_connection(client_socket, address):
   currentPath = os.getcwd()
 
+  # loop to keep receiving client requests
   while True:
-    recv_data = clientSocket.recv(1024).decode('utf-8')
+    recv_data = client_socket.recv(1024).decode('utf-8')
 
     if not recv_data:
       print(f"Closing connection to {address}")
-      clientSocket.close()
+      client_socket.close()
       break
 
     command = recv_data.split(" ")
 
+    # authenticate the client using the 'users.json' file
+    # username = user name input in the command sent by the client
+    # password = password input in the command sent by the client
     if command[0] == "CONNECT":
       try:
         (username, password) = command[1].split(",")
@@ -34,6 +42,8 @@ def service_connection(clientSocket, address):
       except:
         response = "ERROR"
 
+    # command = command sent by client
+    # returns the current path of client
     elif command[0] == "PWD":
       try:
         response = currentPath
@@ -41,7 +51,8 @@ def service_connection(clientSocket, address):
       except:
         response = "ERROR"
 
-
+    # command = command sent by client
+    # change the current path to the one the client is asking for
     elif command[0] == "CHDIR":
       try:
         os.chdir(command[1])
@@ -51,6 +62,8 @@ def service_connection(clientSocket, address):
       except:
         response = "ERROR"
 
+    # command = command sent by client
+    # returns all files in current path (like 'ls' in linux)
     elif command[0] == "GETFILES":
       try:
         files = os.listdir(currentPath)
@@ -61,6 +74,8 @@ def service_connection(clientSocket, address):
       except:
         response = "ERROR"
 
+    # command = command sent by client
+    # returns only the directories in current path
     elif command[0] == "GETDIRS":
       try:
         dirs_only = [file for file in os.listdir() if os.path.isdir(file)]
@@ -74,9 +89,9 @@ def service_connection(clientSocket, address):
     else:
       response = "ERROR"
 
-    
+    # send response builded above to the client in bytes
     response_in_bytes = response.encode()
-    clientSocket.sendall(response_in_bytes)
+    client_socket.sendall(response_in_bytes)
 
 
 HOST = "127.0.0.1" # localhost
@@ -94,6 +109,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
   except:
     print(f"Failed to listen on {(HOST, PORT)}")
 
+  # server loop to listen for client connections
   while True:
     client_socket, address = server_socket.accept()
     print(f"Accepted connection from {address}")
