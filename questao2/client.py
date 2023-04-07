@@ -6,8 +6,8 @@
 #                                                                         #
 # Authors: Alexandre Aparecido Scrocaro Junior, Pedro Klayn               #
 #                                                                         #
-# Dates: github.com/alescrocaro/socket_tcp
-#
+# Dates: github.com/alescrocaro/socket_tcp                                #
+#                                                                         #
 ###########################################################################
 
 import socket
@@ -25,6 +25,10 @@ EXIT_ID = 5
 
 commands = ['ADDFILE', 'DELETE', 'GETFILESLIST', 'GETFILE']
 
+# check the text command and returns its id 
+# command = command the client inputs ('ADDFILE', 'DELETE', 'GETFILESLIST', 
+# 'GETFILE', 'EXIT')
+# return = command id
 def get_command_id_by_name(command):
   match command:
     case 'ADDFILE':
@@ -35,7 +39,12 @@ def get_command_id_by_name(command):
       return GETFILESLIST_ID
     case 'GETFILE':
       return GETFILE_ID
+    case 'EXIT':
+      return EXIT_ID
 
+# check the id command and returns it in message type
+# command = command the client inputs (1, 2 , 3, 4, 5)
+# return = command message
 def get_command_name_by_id(command):
   match command:
     case 1:
@@ -53,6 +62,9 @@ def get_command_name_by_id(command):
     case 5:
       return 'EXIT'
     
+# check the status code and returns it in message type
+# command = status returned by server (1, 2)
+# return = status message
 def get_status_code_by_id(status):
   match status:
     case 1:
@@ -60,7 +72,11 @@ def get_status_code_by_id(status):
     case 2:
       return "ERROR"
     
-    
+# build the header that will be sent in commom by all requests
+# command = command inputed by the client in message type ('ADDFILE', 'DELETE', 
+# 'GETFILE', 'GETFILESLIST')
+# file_name = file name that will be sent to server if command is not GETFILESLIST
+# return = header builded
 def build_header(command, file_name):  
   header = REQ.to_bytes(1, 'big')
   header += get_command_id_by_name(command).to_bytes(1, 'big') # command id
@@ -76,8 +92,11 @@ def build_header(command, file_name):
 
   return header
 
+# get the response and splits it into each info sent by the server
+# response = the server response to the client request
+# return = each info sent by the server in response
 def desestructure_response(response):
-  type = response[0:1]
+  message_type = response[0:1]
   command_id = int.from_bytes(response[1:2], 'big')
   command_name = get_command_name_by_id(command_id)
   status_id = int.from_bytes(response[2:3], 'big')
@@ -93,8 +112,12 @@ def desestructure_response(response):
   elif command_name == 'GETFILESLIST':
     file_list = response[3:].decode('utf-8')
 
-  return type, command_name, status_code, file_size, file_data, file_list
+  return message_type, command_name, status_code, file_size, file_data, file_list
 
+# send the command inputed by client to the server
+# client_socket = connection made with server by the client
+# message = command input by the client
+# return = response sent by the server
 def send_command(client_socket, message):
   if (message.split()[0] != 'GETFILESLIST'):
     command, file_name = message.split()
@@ -116,6 +139,8 @@ PORT = 7770
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((HOST, PORT))
 
+
+# client connection loop, it will run until client send 'EXIT' 
 while True:
   message = input("$ ")
 
