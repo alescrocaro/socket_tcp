@@ -16,13 +16,14 @@ GETFILESLIST_ID = 3
 GETFILE_ID = 4
 EXIT_ID = 5
 
-# wait for client request and calls the requested functionality 
+# wait for client request and calls the requested functionality, if there is 
+# some error, closes connection with client
 # client_socket = client socket used to send response
 # client_address = client address used to know who made the request
 def handle_connection(client_socket, client_address):
   while True:
     try:
-      print('LENDO REQUISICAO CLIENTE')
+      print('Reading client request')
       data = client_socket.recv(1024)
       message_type = data[0:1]
       command_id = data[1:2]
@@ -66,7 +67,8 @@ def handle_connection(client_socket, client_address):
   print("Closing connection")
   client_socket.close()
 
-# upload a file in files_server, if it doesnt exists
+# upload a file in files_server, if it doesnt exists already and return a response
+# to the client
 # client_socket = socket used to send the message to the client
 # file_name = relative path of the file name the client is tryng to add to the server
 # client_address = client address used to know who made the request
@@ -105,8 +107,8 @@ def handle_ADDFILE(client_socket, file_name, client_address):
     print(f"File '{name}' added by {client_address}")
     logging.info(f"File '{name}' added by {client_address}")
 
-# deletes the file the client wants (the client cant send the file_name with a 
-# '/' in first position) 
+# deletes the file the client wants if it exists (the client cant send the file_name with a 
+# '/' in first position) and return response to the client
 # client_socket = socket used to send the message to the client
 # file_name = relative path of the file
 # client_address = client address used to know who made the request
@@ -138,7 +140,7 @@ def handle_DELETE(client_socket, file_name, client_address):
 
 
 # download the requested file -> copy a file that exists in files_server to 
-# files_client
+# files_client and return a response to the client
 # client_socket = socket used to send the message to the client
 # file_name = file name that exists in files_server folder
 # client_address = client address used to know who made the request
@@ -175,7 +177,7 @@ def handle_GETFILE(client_socket, file_name, client_address):
       logging.error(f"Error tryng to send {file_name}")
       print(f"Error tryng to send {file_name}")
 
-# returns all the files in files_server dir
+# get all the files in files_server dir and return to the client
 # client_socket = socket used to send the message to the client
 # client_address = client address used to know who made the request
 def handle_GETFILESLIST(client_socket, client_address):
