@@ -1,3 +1,16 @@
+###########################################################################
+# Description: This code is used to make a connection to the server using #
+#              tcp sockets. It process the commands CONNECT, PWD, CHDIR   # 
+#              GETFILES, GETDIRS and EXIT by command line and send to the #
+#              server, defined by the variables HOST and PORT.            #
+#                                                                         #
+# Authors: Alexandre Aparecido Scrocaro Junior, Pedro Klayn               #
+#                                                                         #
+# Dates: github.com/alescrocaro/socket_tcp                                #
+#                                                                         #
+###########################################################################
+
+
 import socket
 import hashlib
 

@@ -1,3 +1,15 @@
+###########################################################################
+# Description: This code is used to manage a connection with the client   #
+#              using tcp sockets and threads. It process the commands     #
+#              CONNECT, PWD, CHDIR GETFILES, GETDIRS and EXIT, make the   # 
+#              needed processes send a response to the client             #
+#                                                                         #
+# Authors: Alexandre Aparecido Scrocaro Junior, Pedro Klayn               #
+#                                                                         #
+# Dates: github.com/alescrocaro/socket_tcp                                #
+#                                                                         #
+###########################################################################
+
 import socket
 import threading
 import json

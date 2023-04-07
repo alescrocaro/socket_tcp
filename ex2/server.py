@@ -1,8 +1,8 @@
 ###########################################################################
-# Description: This code is used to make a connection to the server using #
-#              tcp sockets. It process the commands ADDFILE, DELETE,      #
-#              GETFILESLIST and GETFILE by command line and send to the   #
-#              server, defined by the variables HOST and PORT.            #
+# Description: This code is used to manage a connection with the client   #
+#              using tcp sockets and threads. It process the commands     #
+#              ADDFILE, DELETE, GETFILESLIST and GETFILE, make the needed #
+#              processes send a response to the client                    #
 #                                                                         #
 # Authors: Alexandre Aparecido Scrocaro Junior, Pedro Klayn               #
 #                                                                         #
