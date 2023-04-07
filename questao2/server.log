@@ -143,3 +143,208 @@
 2023-04-06 00:59:51,277 [INFO] File teste send to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 47794)>
 2023-04-06 00:59:58,236 [INFO] File teste send to client: <socket.socket fd=5, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 4444), raddr=('127.0.0.1', 47794)>
 2023-04-06 01:00:38,006 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 19:51:37,711 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 19:51:40,787 [INFO] Accepted connection from ('127.0.0.1', 52576)
+2023-04-06 19:51:54,202 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 19:52:15,842 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 19:52:17,443 [INFO] Accepted connection from ('127.0.0.1', 45768)
+2023-04-06 19:52:24,950 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 19:56:20,565 [INFO] Accepted connection from ('127.0.0.1', 53160)
+2023-04-06 19:56:25,673 [ERROR] Error while handling connection: 'str' object has no attribute 'send'
+2023-04-06 19:57:41,271 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 19:57:42,736 [INFO] Accepted connection from ('127.0.0.1', 54900)
+2023-04-06 19:57:47,421 [ERROR] Error tryng to get files list
+2023-04-06 19:58:45,166 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 19:58:46,538 [INFO] Accepted connection from ('127.0.0.1', 44896)
+2023-04-06 19:58:49,747 [ERROR] Error tryng to get files list
+2023-04-06 19:59:07,722 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 19:59:08,684 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 19:59:10,103 [INFO] Accepted connection from ('127.0.0.1', 52442)
+2023-04-06 19:59:14,456 [ERROR] Error tryng to get files list
+2023-04-06 20:00:27,499 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:00:28,290 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 20:00:29,482 [INFO] Accepted connection from ('127.0.0.1', 51328)
+2023-04-06 20:03:54,525 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:03:55,428 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 20:03:56,793 [INFO] Accepted connection from ('127.0.0.1', 40384)
+2023-04-06 20:04:51,664 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:04:52,459 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 20:04:53,676 [INFO] Accepted connection from ('127.0.0.1', 34564)
+2023-04-06 20:07:12,026 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:07:12,670 [INFO] Accepted connection from ('127.0.0.1', 50642)
+2023-04-06 20:07:28,669 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:07:29,850 [INFO] Accepted connection from ('127.0.0.1', 45492)
+2023-04-06 20:08:48,897 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:08:50,210 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:08:51,748 [INFO] Accepted connection from ('127.0.0.1', 51648)
+2023-04-06 20:08:57,970 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:10:02,926 [INFO] Accepted connection from ('127.0.0.1', 55496)
+2023-04-06 20:11:18,109 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:11:54,570 [INFO] Accepted connection from ('127.0.0.1', 51926)
+2023-04-06 20:12:06,718 [ERROR] Error while handling connection: invalid literal for int() with base 10: ''
+2023-04-06 20:13:03,004 [INFO] Accepted connection from ('127.0.0.1', 50958)
+2023-04-06 20:13:16,312 [ERROR] Error while handling connection: invalid literal for int() with base 10: 'ste'
+2023-04-06 20:14:56,248 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:14:57,706 [INFO] Accepted connection from ('127.0.0.1', 33952)
+2023-04-06 20:15:01,039 [ERROR] Something went wrong...
+2023-04-06 20:15:01,040 [ERROR] Error while handling connection: invalid literal for int() with base 10: b's'
+2023-04-06 20:16:41,546 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:16:42,846 [INFO] Accepted connection from ('127.0.0.1', 34268)
+2023-04-06 20:16:46,926 [ERROR] Error while handling connection: invalid literal for int() with base 10: b'\x05'
+2023-04-06 20:23:03,061 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:23:04,307 [INFO] Accepted connection from ('127.0.0.1', 52596)
+2023-04-06 20:23:08,748 [ERROR] Error while handling connection: from_bytes() missing required argument 'byteorder' (pos 2)
+2023-04-06 20:23:22,238 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:23:23,441 [INFO] Accepted connection from ('127.0.0.1', 34484)
+2023-04-06 20:23:28,208 [ERROR] Something went wrong...
+2023-04-06 20:23:28,209 [ERROR] Something went wrong...
+2023-04-06 20:25:55,833 [ERROR] No data
+2023-04-06 20:25:58,999 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:26:00,265 [INFO] Accepted connection from ('127.0.0.1', 45990)
+2023-04-06 20:26:03,248 [ERROR] Error while handling connection: a bytes-like object is required, not 'str'
+2023-04-06 20:29:14,347 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:29:15,492 [INFO] Accepted connection from ('127.0.0.1', 57090)
+2023-04-06 20:29:19,079 [ERROR] Error while handling connection: can't concat str to bytes
+2023-04-06 20:30:28,529 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 20:30:30,779 [INFO] Accepted connection from ('127.0.0.1', 52512)
+2023-04-06 20:30:35,093 [ERROR] Error while handling connection: 'bytes' object has no attribute 'encode'
+2023-04-06 20:31:03,759 [INFO] Listening on 127.0.0.1:7770
+2023-04-06 20:31:05,053 [INFO] Accepted connection from ('127.0.0.1', 34258)
+2023-04-06 20:31:08,832 [ERROR] File teste already exists
+2023-04-06 20:31:08,833 [ERROR] Something went wrong...
+2023-04-06 20:32:03,895 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:32:05,076 [INFO] Accepted connection from ('127.0.0.1', 46106)
+2023-04-06 20:32:14,822 [ERROR] File teste already exists
+2023-04-06 20:32:14,822 [ERROR] Something went wrong...
+2023-04-06 20:32:51,337 [ERROR] No data
+2023-04-06 20:32:52,588 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:32:53,864 [INFO] Accepted connection from ('127.0.0.1', 55412)
+2023-04-06 20:32:58,940 [ERROR] File teste already exists
+2023-04-06 20:32:58,940 [ERROR] Something went wrong...
+2023-04-06 20:33:46,898 [ERROR] No data
+2023-04-06 20:33:47,800 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:33:49,066 [INFO] Accepted connection from ('127.0.0.1', 49674)
+2023-04-06 20:33:53,543 [ERROR] File teste already exists
+2023-04-06 20:33:53,543 [ERROR] Something went wrong...
+2023-04-06 20:36:45,844 [ERROR] No data
+2023-04-06 20:36:46,697 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:39:15,293 [INFO] Accepted connection from ('127.0.0.1', 47490)
+2023-04-06 20:39:19,104 [ERROR] File teste already exists
+2023-04-06 20:39:19,104 [ERROR] Something went wrong...
+2023-04-06 20:39:41,979 [ERROR] No data
+2023-04-06 20:39:43,457 [INFO] Accepted connection from ('127.0.0.1', 48770)
+2023-04-06 20:39:47,845 [ERROR] File teste already exists
+2023-04-06 20:39:47,846 [ERROR] Something went wrong...
+2023-04-06 20:41:49,555 [ERROR] No data
+2023-04-06 20:41:50,791 [INFO] Accepted connection from ('127.0.0.1', 42642)
+2023-04-06 20:41:55,811 [ERROR] File teste already exists
+2023-04-06 20:41:55,811 [ERROR] Something went wrong...
+2023-04-06 20:41:55,928 [ERROR] No data
+2023-04-06 20:42:06,346 [INFO] Accepted connection from ('127.0.0.1', 48064)
+2023-04-06 20:42:14,332 [ERROR] File teste already exists
+2023-04-06 20:42:14,333 [ERROR] Something went wrong...
+2023-04-06 20:42:14,442 [ERROR] No data
+2023-04-06 20:44:24,369 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:44:26,647 [INFO] Accepted connection from ('127.0.0.1', 47742)
+2023-04-06 20:44:30,985 [ERROR] File teste already exists
+2023-04-06 20:44:30,985 [ERROR] Something went wrong...
+2023-04-06 20:44:31,105 [ERROR] No data
+2023-04-06 20:45:16,629 [INFO] Accepted connection from ('127.0.0.1', 54270)
+2023-04-06 20:45:20,146 [ERROR] File teste already exists
+2023-04-06 20:45:20,146 [ERROR] Something went wrong...
+2023-04-06 20:45:20,253 [ERROR] No data
+2023-04-06 20:45:49,090 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:45:50,589 [INFO] Accepted connection from ('127.0.0.1', 56912)
+2023-04-06 20:45:53,767 [ERROR] File teste already exists
+2023-04-06 20:45:53,767 [ERROR] Something went wrong...
+2023-04-06 20:45:53,887 [ERROR] No data
+2023-04-06 20:46:37,223 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:46:38,526 [INFO] Accepted connection from ('127.0.0.1', 55524)
+2023-04-06 20:46:46,849 [ERROR] File teste already exists
+2023-04-06 20:46:46,849 [ERROR] Something went wrong...
+2023-04-06 20:46:46,931 [ERROR] No data
+2023-04-06 20:48:08,927 [INFO] Accepted connection from ('127.0.0.1', 38252)
+2023-04-06 20:48:12,778 [ERROR] File teste already exists
+2023-04-06 20:48:12,779 [ERROR] Something went wrong...
+2023-04-06 20:48:12,900 [ERROR] No data
+2023-04-06 20:49:41,472 [INFO] Accepted connection from ('127.0.0.1', 35118)
+2023-04-06 20:49:44,729 [ERROR] File teste already exists
+2023-04-06 20:49:44,729 [ERROR] Something went wrong...
+2023-04-06 20:49:44,822 [ERROR] No data
+2023-04-06 20:50:17,589 [INFO] Accepted connection from ('127.0.0.1', 33366)
+2023-04-06 20:50:20,109 [ERROR] File teste already exists
+2023-04-06 20:50:20,110 [ERROR] Something went wrong...
+2023-04-06 20:50:20,201 [ERROR] No data
+2023-04-06 20:51:16,628 [INFO] Accepted connection from ('127.0.0.1', 34650)
+2023-04-06 20:51:21,403 [ERROR] File teste already exists
+2023-04-06 20:51:21,404 [ERROR] Something went wrong...
+2023-04-06 20:51:21,479 [ERROR] No data
+2023-04-06 20:51:33,499 [INFO] Accepted connection from ('127.0.0.1', 52884)
+2023-04-06 20:51:36,858 [ERROR] File teste already exists
+2023-04-06 20:51:36,859 [ERROR] Something went wrong...
+2023-04-06 20:51:36,981 [ERROR] No data
+2023-04-06 20:52:48,731 [INFO] Accepted connection from ('127.0.0.1', 42036)
+2023-04-06 20:52:57,888 [ERROR] File teste already exists
+2023-04-06 20:52:57,888 [ERROR] Something went wrong...
+2023-04-06 20:52:58,004 [ERROR] No data
+2023-04-06 20:53:24,390 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 20:53:26,048 [INFO] Accepted connection from ('127.0.0.1', 32810)
+2023-04-06 20:53:29,143 [ERROR] File teste already exists
+2023-04-06 20:53:29,143 [ERROR] Something went wrong...
+2023-04-06 20:53:29,227 [ERROR] No data
+2023-04-06 20:53:42,920 [INFO] Accepted connection from ('127.0.0.1', 46790)
+2023-04-06 20:53:46,556 [ERROR] File teste already exists
+2023-04-06 20:53:46,557 [ERROR] Something went wrong...
+2023-04-06 20:53:46,646 [ERROR] No data
+2023-04-06 20:54:04,486 [INFO] Accepted connection from ('127.0.0.1', 58638)
+2023-04-06 20:54:08,561 [ERROR] File teste already exists
+2023-04-06 20:54:08,561 [ERROR] Something went wrong...
+2023-04-06 20:54:08,653 [ERROR] No data
+2023-04-06 20:54:39,755 [INFO] Accepted connection from ('127.0.0.1', 41852)
+2023-04-06 20:54:47,009 [INFO] File 'testeteste' added by ('127.0.0.1', 41852)
+2023-04-06 20:54:47,126 [ERROR] No data
+2023-04-06 20:55:40,633 [INFO] Accepted connection from ('127.0.0.1', 51612)
+2023-04-06 20:55:45,405 [ERROR] File testeteste already exists
+2023-04-06 20:55:45,406 [ERROR] Something went wrong...
+2023-04-06 20:55:45,523 [ERROR] No data
+2023-04-06 20:55:58,868 [INFO] Accepted connection from ('127.0.0.1', 54734)
+2023-04-06 20:56:03,278 [ERROR] File testeteste already exists
+2023-04-06 20:56:03,278 [ERROR] Something went wrong...
+2023-04-06 20:56:03,388 [ERROR] No data
+2023-04-06 20:57:21,774 [INFO] Accepted connection from ('127.0.0.1', 49122)
+2023-04-06 20:57:28,697 [ERROR] File testeteste already exists
+2023-04-06 20:57:28,698 [ERROR] Something went wrong...
+2023-04-06 20:57:28,778 [ERROR] No data
+2023-04-06 20:57:50,825 [INFO] Accepted connection from ('127.0.0.1', 51668)
+2023-04-06 20:57:57,890 [ERROR] File testeteste already exists
+2023-04-06 20:57:57,891 [ERROR] Something went wrong...
+2023-04-06 20:57:58,003 [ERROR] No data
+2023-04-06 20:58:17,874 [INFO] Accepted connection from ('127.0.0.1', 40614)
+2023-04-06 20:58:24,123 [ERROR] File testeteste already exists
+2023-04-06 20:58:24,235 [ERROR] No data
+2023-04-06 20:58:56,092 [INFO] Accepted connection from ('127.0.0.1', 51546)
+2023-04-06 20:59:00,095 [ERROR] File testeteste already exists
+2023-04-06 20:59:00,096 [ERROR] Something went wrong...
+2023-04-06 20:59:00,181 [ERROR] No data
+2023-04-06 21:02:50,534 [INFO] Accepted connection from ('127.0.0.1', 52912)
+2023-04-06 21:02:54,300 [ERROR] Error while handling connection: [Errno 2] No such file or directory: 'teste'
+2023-04-06 21:03:39,249 [INFO] Accepted connection from ('127.0.0.1', 39942)
+2023-04-06 21:03:43,634 [ERROR] File testeteste already exists
+2023-04-06 21:03:43,634 [ERROR] Something went wrong...
+2023-04-06 21:03:43,706 [ERROR] No data
+2023-04-06 21:05:13,233 [INFO] Accepted connection from ('127.0.0.1', 52774)
+2023-04-06 21:05:19,408 [ERROR] File testeteste already exists
+2023-04-06 21:05:19,409 [ERROR] Something went wrong...
+2023-04-06 21:05:29,311 [ERROR] No data
+2023-04-06 21:05:30,258 [INFO] Accepted connection from ('127.0.0.1', 46002)
+2023-04-06 21:05:35,540 [INFO] File 'testeteste' added by ('127.0.0.1', 46002)
+2023-04-06 21:06:25,348 [ERROR] No data
+2023-04-06 21:06:25,842 [INFO] Accepted connection from ('127.0.0.1', 41690)
+2023-04-06 21:06:29,592 [ERROR] File testeteste already exists
+2023-04-06 21:06:29,592 [ERROR] Something went wrong...
+2023-04-06 21:06:40,056 [INFO] File 'testeteste' added by ('127.0.0.1', 41690)
+2023-04-06 21:15:15,695 [ERROR] No data
+2023-04-06 21:15:18,015 [INFO] Listening on 127.0.0.1:4444
+2023-04-06 21:15:19,956 [INFO] Accepted connection from ('127.0.0.1', 41474)
+2023-04-06 21:15:23,670 [INFO] File 'testeteste' added by ('127.0.0.1', 41474)
+2023-04-06 21:15:51,282 [ERROR] No data
