@@ -84,7 +84,7 @@ if __name__ == '__main__':
   nick, address, port = user_inputs()
 
   # AF_INET = internet address family for ipv4
-  # SOCK_STREAM = socket type for UDP
+  # SOCK_DGRAM = socket type for UDP
   sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
   # connect the socket to the UDP port
