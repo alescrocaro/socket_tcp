@@ -1,13 +1,33 @@
+###########################################################################
+# Description: This code implements a chat p2p using UDP sockets, where   #
+#              the clients will connect with each other being able to send#
+#              messages, emojis, url and an ECHO command to check if      #
+#              connection is up yet. The message is sent through a header #
+#              (details in Atividade 02 - UDP_v1.pdf) to the other client,#
+#              and is showed in its interface. Each message has its own   #
+#              type, defined below in the code                            #
+#                                                                         #
+#                                                                         #
+# Authors: Alexandre Aparecido Scrocaro Junior, Pedro Klayn               #
+#                                                                         #
+# Dates: github.com/alescrocaro/socket_tcp/udp                            #
+#                                                                         #
+###########################################################################
+
+
 import socket
 import threading
 import re
 
+# message types
 NORMAL_MESSAGE = 1
 EMOJI_MESSAGE = 2
 URL_MESSAGE = 3
 ECHO_MESSAGE = 4
 
-
+# loop to keep listening on other peer messages
+# it will receive messages and, if the received message is an ECHO, returns
+# the message back
 def receive_message(sock):
   while True:
     (message, address) = sock.recvfrom(1024)
@@ -24,6 +44,7 @@ def receive_message(sock):
     last_pos_message = last_pos_len_message + len_message
     message = message[last_pos_len_message:last_pos_message].decode('utf-8')
 
+    # envia a mensagem de volta sem o ECHO para não entrar em loop
     if message_type == ECHO_MESSAGE:
       echo_message = message[5:]
       header = build_header(echo_message, nick)
@@ -32,12 +53,13 @@ def receive_message(sock):
     else:
       print('{}: {}'.format(nick, message))
 
+# Receive user inputs and return it splitted in its nick name, address and port
 def user_inputs():
-  nick = input('Nick: ')
+  nick = input('Nick (enter to be anonymous): ')
   if nick == '' or nick.isspace():
     nick = 'Anonymous'
 
-  address = input('IP address (input nothing if you want to be localhost): ')
+  address = input('IP address (enter if you want it to be localhost): ')
   if address == '' or address.isspace():
     address = '127.0.0.1'
   
@@ -45,17 +67,36 @@ def user_inputs():
 
   return nick, address, port
 
-def is_url(text):
+# receive the message and check if it is a url
+# message = message inputed by user
+# return:
+#   true if it is a url
+#   false if it is not a url
+def is_url(message):
   url_pattern = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
 
-  return bool(url_pattern.match(text))
+  return bool(url_pattern.match(message))
 
-def is_emoji(text):
-  if text == ':)' or text == ':(' or text == '8)' or text == ':D' or text == ':O' or text == ':P': 
+# receive the message and check if it is an emoji
+# => The documatation was not clear about what is an emoji, so we defined to: 
+#    ':)', ':(', '8)', ':D', ':O', ':P': 
+# message = message inputed by user
+# return:
+#   true if it is an emoji
+#   false if it is not an emoji
+def is_emoji(message):
+  if message == ':)' or message == ':(' or message == '8)' or message == ':D' or message == ':O' or message == ':P': 
     return True
 
   return False
 
+
+# receive the message and nick of client user and build the header as described 
+# in 'Atividade 02 - UDP_v1.pdf'
+# message = message inputed by user
+# nick = nick name of user that sent the message
+# return:
+#   header w
 def build_header(message, nick):
   len_nick = len(nick)
 
