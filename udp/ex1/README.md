@@ -39,4 +39,4 @@ $ Alexandre: :D
 ## Libraries
 - `socket`: used to manage connections between client and server
 - `threading`: used to manage client threads
-- `re`: used detect URLs through a regex
+- `re`: used to detect URLs through a regex
