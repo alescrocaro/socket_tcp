@@ -5,7 +5,9 @@
 #              connection is up yet. The message is sent through a header #
 #              (details in Atividade 02 - UDP_v1.pdf) to the other client,#
 #              and is showed in its interface. Each message has its own   #
-#              type, defined below in the code                            #
+#              type, defined below in the code. The user running the      #
+#              will behave like a server that accepts connections from    #
+#              other users.                                               #   
 #                                                                         #
 #                                                                         #
 # Authors: Alexandre Aparecido Scrocaro Junior, Pedro Klayn               #
@@ -133,7 +135,7 @@ if __name__ == '__main__':
   listen_address = (address, (port + 1))
   try:
     sock.bind(listen_address)
-    print('server up')
+    print('waiting connection...')
 
   # when the port is being used, it means there is already a server running in
   # it, so we need to invert the ports to connect the two clients with each other
