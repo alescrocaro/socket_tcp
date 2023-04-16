@@ -1,4 +1,4 @@
-# socket_tcp
+# socket udp
 
 ## How to execute
 run the server in a terminal
